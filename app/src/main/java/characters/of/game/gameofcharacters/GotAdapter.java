@@ -35,7 +35,13 @@ public class GotAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = layoutInflater.inflate(android.R.layout.simple_list_item_1, parent, false);
+        View view;
+        if (convertView == null) {
+            view = layoutInflater.inflate(android.R.layout.simple_list_item_1, parent, false);
+        } else {
+            view = convertView;
+        }
+
         ((TextView) view).setText(getItem(position));
         return view;
     }
