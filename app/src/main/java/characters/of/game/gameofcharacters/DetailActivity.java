@@ -1,9 +1,6 @@
 package characters.of.game.gameofcharacters;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.AsyncTask;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
@@ -11,12 +8,10 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-
 public class DetailActivity extends AppCompatActivity {
     public static final String characterKey = "character";
+    public static final String LOG_TAG = "GOT_APP";
+    Context context = this.context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
