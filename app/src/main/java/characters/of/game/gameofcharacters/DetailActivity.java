@@ -33,34 +33,21 @@ public class DetailActivity extends AppCompatActivity {
         TextView houseName = (TextView) findViewById(R.id.house_name);
 
         characterName.setText(character.name);
-//        characterImage.setImageResource(character.fullResId);
-        //new ImageLoader().execute("https://winteriscoming.net/wp-content/uploads/2011/04/jon-on-wall.jpg");
-        Picasso.with(this).load("https://winteriscoming.net/wp-content/uploads/2011/04/jon-on-wall.jpg").into(characterImage);
-        houseThumb.setImageResource(character.houseResId);
+
+        Picasso.with(this).load("https://winteriscoming.net/wp-content/uploads/2011/04/jon-on-wall.jpg")
+                .placeholder(R.drawable.profile_placeholder)
+                .error(R.drawable.profile_placeholder_error)
+                .into(characterImage);
+
+        Picasso.with(this).load(character.houseResId)
+                .placeholder(R.drawable.house_placeholder)
+                .error(R.drawable.house_placeholder_error)
+                .into(houseThumb);
+
+//        houseThumb.setImageResource(character.houseResId);
+
         houseDetail.setText(character.description);
         houseName.setText(character.house);
     }
 
-    private class ImageLoader extends AsyncTask<String, Void, Bitmap> {
-        ImageView imageView = null;
-
-        @Override
-        protected Bitmap doInBackground(String... params) {
-            String url = params[0];
-            imageView = (ImageView)findViewById(R.id.character_img);
-            Bitmap bitmap = null;
-            try {
-                bitmap = BitmapFactory.decodeStream((InputStream) new URL(url).getContent());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return bitmap;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            imageView.setImageBitmap(bitmap);
-            super.onPostExecute(bitmap);
-        }
-    }
 }

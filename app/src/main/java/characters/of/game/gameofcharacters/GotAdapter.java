@@ -9,12 +9,16 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 public class GotAdapter extends BaseAdapter {
 
+    private Context context;
     private GoTCharacter[] characters;
     private LayoutInflater layoutInflater;
 
     public GotAdapter(Context context, GoTCharacter[] characters) {
+        this.context = context;
         this.characters = characters;
         layoutInflater = LayoutInflater.from(context);
     }
@@ -45,7 +49,12 @@ public class GotAdapter extends BaseAdapter {
 
         ImageView characterThumb = (ImageView) view.findViewById(R.id.character_thumb);
         TextView characterName = (TextView) view.findViewById(R.id.character_name);
-        characterThumb.setImageResource(getItem(position).resId);
+//        characterThumb.setImageResource(getItem(position).resId);
+        Picasso.with(context)
+                .load("https://winteriscoming.net/wp-content/uploads/2011/04/jon-on-wall.jpg")
+                .placeholder(R.drawable.profile_placeholder)
+                .error(R.drawable.profile_placeholder_error)
+                .into(characterThumb);
         characterName.setText(getItem(position).name);
 
         return view;

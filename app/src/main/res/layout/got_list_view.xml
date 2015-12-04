@@ -9,8 +9,9 @@
     android:paddingBottom="8dp">
 
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
         android:id="@+id/character_thumb"
         tools:src="@drawable/arya"/>
 
@@ -19,6 +20,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/character_name"
         android:layout_gravity="center_vertical"
-        android:paddingLeft="8dp"
+        android:layout_marginLeft="8dp"
         tools:text="Arya Stark"/>
 </LinearLayout>

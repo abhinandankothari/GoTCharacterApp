@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:src= "@drawable/jon_full"
-        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
         android:id="@+id/character_img"/>
 
     <FrameLayout
@@ -43,7 +43,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 tools:src="@drawable/stark"
-                android:id="@+id/house_thumb"></ImageView>
+                android:id="@+id/house_thumb"/>
 
             <TextView
                 android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
                 tools:text="Stark"
                 android:layout_marginTop="5dp"
                 android:layout_gravity="center_horizontal"
-                android:id="@+id/house_name"></TextView>
+                android:id="@+id/house_name"/>
         </LinearLayout>
 
         <TextView
@@ -60,7 +60,7 @@
             tools:text="Jon Snow doesn't know anything"
             android:textSize="20sp"
             android:layout_marginLeft="12dp"
-            android:id="@+id/house_detail"></TextView>
+            android:id="@+id/house_detail"/>
     </LinearLayout>
 
 </LinearLayout>
