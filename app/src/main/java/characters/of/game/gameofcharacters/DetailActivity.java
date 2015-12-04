@@ -29,7 +29,7 @@ public class DetailActivity extends AppCompatActivity {
 
         characterName.setText(character.name);
 
-        Picasso.with(this).load("https://winteriscoming.net/wp-content/uploads/2011/04/jon-on-wall.jpg")
+        Picasso.with(this).load(character.fullUrl)
                 .placeholder(R.drawable.profile_placeholder)
                 .error(R.drawable.profile_placeholder_error)
                 .into(characterImage);

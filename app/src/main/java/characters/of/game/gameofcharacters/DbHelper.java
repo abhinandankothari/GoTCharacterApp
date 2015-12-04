@@ -2,6 +2,7 @@ package characters.of.game.gameofcharacters;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -9,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 /**
  * Created by abhinandan on 04/12/15.
  */
-public class DbHelper extends SQLiteOpenHelper {
+public class DbHelper extends SQLiteOpenHelper{
 
     public static final String DATABASE_NAME = "GoT.db";
     public static final int VERSION = 1;
@@ -51,5 +52,12 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public int getRowCount() {
         return (int) DatabaseUtils.longForQuery(getReadableDatabase(), "select count(*) from " + GoTCharacter.GOT_TABLE, new String[0]);
+    }
+
+    public Cursor getAllRows() {
+        String query = "Select * from " + GoTCharacter.GOT_TABLE;
+        SQLiteDatabase database = this.getReadableDatabase();
+        return database.rawQuery( query,null);
+        // /return DatabaseUtils. longForQuery(getReadableDatabase(), "select * from " + GoTCharacter.GOT_TABLE, new String[0]);
     }
 }
