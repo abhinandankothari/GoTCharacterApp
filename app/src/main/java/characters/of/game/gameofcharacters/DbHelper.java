@@ -14,12 +14,16 @@ public class DbHelper extends SQLiteOpenHelper{
 
     public static final String DATABASE_NAME = "GoT.db";
     public static final int VERSION = 1;
-
-
+    public static DbHelper dbHelper;
     public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
     }
-
+    public static DbHelper getInstance(Context context) {
+        if(dbHelper == null) {
+            dbHelper =  new DbHelper(context);
+        }
+        return dbHelper;
+    }
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createSql = "CREATE TABLE " + GoTCharacter.GOT_TABLE + "(" +
