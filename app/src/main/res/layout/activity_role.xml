@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="characters.of.game.gameofcharacters.RoleActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="characters.of.game.gameofcharacters.RoleActivity">
 
     <ImageView
         android:id="@+id/image_profile"
@@ -14,12 +14,13 @@
         android:maxHeight="360dp"
         android:src="@drawable/profile_placeholder_full" />
 
+
     <EditText
+        android:id="@+id/text_character_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:id="@+id/fileName"
-        android:hint="Character Name"/>
+        android:hint="Character Name" />
 
     <RadioGroup
         android:id="@+id/houseRadioGroup"
@@ -28,27 +29,35 @@
         android:orientation="horizontal">
 
         <RadioButton
+            android:id="@+id/radio_lannister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:button="@drawable/btn_lannister"/>
+            android:button="@drawable/btn_lannister" />
+
         <RadioButton
+            android:id="@+id/radio_stark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:button="@drawable/btn_stark"/>
+            android:button="@drawable/btn_stark" />
+
         <RadioButton
+            android:id="@+id/radio_baratheon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:button="@drawable/btn_baretheon"/>
+            android:button="@drawable/btn_baretheon" />
+
         <RadioButton
+            android:id="@+id/radio_bolton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:button="@drawable/btn_bolton"/>
+            android:button="@drawable/btn_bolton" />
     </RadioGroup>
+
     <Button
+        android:id="@+id/addCharacter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
-        android:id="@+id/addCharacter"
-        android:layout_gravity="right" />
+        android:layout_gravity="right"
+        android:text="Save" />
 
 </LinearLayout>

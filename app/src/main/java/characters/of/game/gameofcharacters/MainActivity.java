@@ -21,19 +21,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         characterList = (ListView) findViewById(R.id.character_list);
-        characterList.setAdapter(new GotAdapter(this, GoTCharacter.GOT_CHARACTERS));
+        final GotAdapter adapter = new GotAdapter(this);
+        characterList.setAdapter(adapter);
         characterList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                GoTCharacter gotCharacter = GoTCharacter.GOT_CHARACTERS[position];
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-                intent.putExtra(DetailActivity.characterKey, gotCharacter);
+                intent.putExtra(DetailActivity.characterKey, adapter.getItem(position));
                 startActivity(intent);
             }
         });
 
-        DbHelper dbHelper = new DbHelper(this);
+        DbHelper dbHelper = DbHelper.getInstance(this);
         int rowCount = dbHelper.getRowCount();
         Log.d(DetailActivity.LOG_TAG, "Total rows " + rowCount);
     }

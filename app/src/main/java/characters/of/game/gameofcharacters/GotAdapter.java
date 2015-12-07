@@ -18,11 +18,11 @@ public class GotAdapter extends BaseAdapter {
     private LayoutInflater layoutInflater;
     private final Cursor cursor;
 
-    public GotAdapter(Context context, GoTCharacter[] characters) {
+    public GotAdapter(Context context) {
         this.context = context;
         this.characters = characters;
         layoutInflater = LayoutInflater.from(context);
-        DbHelper dbHelper = new DbHelper(context);
+        DbHelper dbHelper = DbHelper.getInstance(context);
         cursor = dbHelper.getAllRows();
     }
 

@@ -20,16 +20,17 @@ public class RoleActivity extends AppCompatActivity {
 
     static final int RESULT_CODE = 1000;
     ImageView imageView;
-    EditText fileName;
+    EditText characterName;
     Button button;
     RadioGroup radioGroup;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_role);
         imageView = (ImageView) findViewById(R.id.image_profile);
-        fileName = (EditText) findViewById(R.id.fileName);
+        characterName = (EditText) findViewById(R.id.text_character_name);
         button = (Button) findViewById(R.id.addCharacter);
         radioGroup = (RadioGroup) findViewById(R.id.houseRadioGroup);
 
@@ -46,25 +47,64 @@ public class RoleActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (fileName.getText().toString().trim().isEmpty()) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(RoleActivity.this);
-                    builder.setMessage("NO IMAGE SELECTED")
-                            .setTitle("WARNING");
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            // User clicked OK button
-                        }
-                    });
-                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            // User cancelled the dialog
-                        }
-                    });
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
+                String housename = null;
+                int housedrawable = 0;
+                if (characterName.getText().toString().trim().isEmpty()) {
+                    characterName.setError("Cannot be empty");
+                    return;
                 }
-                Log.d("selected radio group", radioGroup.getCheckedRadioButtonId() + "");
+                if (radioGroup.getCheckedRadioButtonId() == -1) {
+                    new AlertDialog.Builder(RoleActivity.this).setMessage("NO HOUSE")
+                            .setTitle("WARNING")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // User clicked OK button
+                                }
+                            })
+                            .setCancelable(true)
+                            .show();
+                    return;
+                }
+                else {
 
+                    switch (radioGroup.getCheckedRadioButtonId())
+                    {
+                        case R.id.radio_baratheon:
+                            housedrawable = R.drawable.baratheon;
+                            housename = "Baretheon";
+                            break;
+                        case R.id.radio_stark:
+                            housedrawable = R.drawable.stark;
+                            housename = "Stark";
+                            break;
+                        case R.id.radio_lannister:
+                            housedrawable = R.drawable.lannister;
+                            housename = "Lannister" ;
+                            break;
+                        case R.id.radio_bolton:
+                            housedrawable = R.drawable.bolton;
+                            housename =  "Bolton";
+                            break;
+                    }
+                }
+
+                String filePath = (String) imageView.getTag();
+                if (filePath == null) {
+                    new AlertDialog.Builder(RoleActivity.this).setMessage("No Image")
+                            .setTitle("WARNING")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // User clicked OK button
+                                }
+                            })
+                            .setCancelable(true)
+                            .show();
+                    return;
+                }
+
+                GoTCharacter newCharacter =  new GoTCharacter(characterName.getText().toString(), filePath, filePath, true, housename, housedrawable, "From the app");
+                DbHelper helper = DbHelper.getInstance(RoleActivity.this);
+                helper.addcharacter(newCharacter);
             }
         });
 
@@ -83,7 +123,7 @@ public class RoleActivity extends AppCompatActivity {
             Log.d("GOT", picturePath);
             Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
             imageView.setImageBitmap(bitmap);
-            fileName.setText(picturePath);
+            imageView.setTag("file://" + picturePath);
             return;
         }
         super.onActivityResult(requestCode, resultCode, data);
