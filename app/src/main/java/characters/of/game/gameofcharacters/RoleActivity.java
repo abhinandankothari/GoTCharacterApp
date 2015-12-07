@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 
 public class RoleActivity extends AppCompatActivity {
 
@@ -19,6 +20,7 @@ public class RoleActivity extends AppCompatActivity {
     ImageView imageView;
     EditText fileName;
     Button button;
+    RadioGroup radioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,7 @@ public class RoleActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.image_profile);
         fileName = (EditText) findViewById(R.id.fileName);
         button = (Button) findViewById(R.id.addCharacter);
+        radioGroup = (RadioGroup) findViewById(R.id.houseRadioGroup);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,8 +47,12 @@ public class RoleActivity extends AppCompatActivity {
             if(fileName.getText().toString().trim().isEmpty()) {
                 Log.d("GOT","No File");
             }
+                Log.d("selected radio group", radioGroup.getCheckedRadioButtonId()+"");
+
             }
         });
+
+//        radioGroup.setOnClickListener();
     }
 
 

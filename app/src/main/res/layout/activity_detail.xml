@@ -42,7 +42,7 @@
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                tools:src="@drawable/stark"
+                tools:src="@drawable/btn_stark"
                 android:id="@+id/house_thumb"/>
 
             <TextView
