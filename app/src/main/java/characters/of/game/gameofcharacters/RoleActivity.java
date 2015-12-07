@@ -9,18 +9,24 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 public class RoleActivity extends AppCompatActivity {
 
-    static final int RESULT_CODE = 1;
+    static final int RESULT_CODE = 1000;
     ImageView imageView;
+    EditText fileName;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_role);
         imageView = (ImageView) findViewById(R.id.image_profile);
+        fileName = (EditText) findViewById(R.id.fileName);
+        button = (Button) findViewById(R.id.addCharacter);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,7 +37,17 @@ public class RoleActivity extends AppCompatActivity {
                 startActivityForResult(intent, RESULT_CODE);
             }
         });
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            if(fileName.getText().toString().trim().isEmpty()) {
+                Log.d("GOT","No File");
+            }
+            }
+        });
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -45,6 +61,7 @@ public class RoleActivity extends AppCompatActivity {
             Log.d("GOT", picturePath);
             Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
             imageView.setImageBitmap(bitmap);
+            fileName.setText(picturePath);
             return;
         }
         super.onActivityResult(requestCode, resultCode, data);
