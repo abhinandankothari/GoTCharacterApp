@@ -14,6 +14,7 @@ import android.widget.ListView;
 public class MainActivity extends AppCompatActivity {
 
     ListView characterList;
+    private GotAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(DetailActivity.LOG_TAG, "Total rows " + rowCount);
 
         characterList = (ListView) findViewById(R.id.character_list);
-        final GotAdapter adapter = new GotAdapter(this);
+        adapter = new GotAdapter(this);
         characterList.setAdapter(adapter);
         characterList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -36,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
 
     @Override
@@ -57,5 +56,17 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.onStop();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        adapter.onStart();
     }
 }

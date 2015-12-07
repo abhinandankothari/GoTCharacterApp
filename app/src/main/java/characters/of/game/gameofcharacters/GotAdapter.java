@@ -16,7 +16,7 @@ public class GotAdapter extends BaseAdapter {
     private Context context;
     private GoTCharacter[] characters;
     private LayoutInflater layoutInflater;
-    private final Cursor cursor;
+    private Cursor cursor;
 
     public GotAdapter(Context context) {
         this.context = context;
@@ -71,5 +71,20 @@ public class GotAdapter extends BaseAdapter {
         characterName.setText(item.name);
         return view;
     }
+
+    public void onStart() {
+        safeCloseCursor();
+        cursor = DbHelper.getInstance(context).getAllRows();
+        notifyDataSetChanged();
+    }
+
+    private void safeCloseCursor() {
+        if (cursor != null && !cursor.isClosed()) cursor.close();
+    }
+
+    public void onStop() {
+        safeCloseCursor();
+    }
+// On Stop and on start - Cursor close and carete
 
 }
