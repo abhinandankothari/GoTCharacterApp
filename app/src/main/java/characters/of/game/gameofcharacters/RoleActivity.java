@@ -1,5 +1,7 @@
 package characters.of.game.gameofcharacters;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -44,15 +46,28 @@ public class RoleActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            if(fileName.getText().toString().trim().isEmpty()) {
-                Log.d("GOT","No File");
-            }
-                Log.d("selected radio group", radioGroup.getCheckedRadioButtonId()+"");
+                if (fileName.getText().toString().trim().isEmpty()) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(RoleActivity.this);
+                    builder.setMessage("NO IMAGE SELECTED")
+                            .setTitle("WARNING");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // User clicked OK button
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // User cancelled the dialog
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+                Log.d("selected radio group", radioGroup.getCheckedRadioButtonId() + "");
 
             }
         });
 
-//        radioGroup.setOnClickListener();
     }
 
 
