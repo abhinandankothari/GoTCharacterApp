@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 public class RoleActivity extends AppCompatActivity {
 
@@ -105,6 +106,7 @@ public class RoleActivity extends AppCompatActivity {
                 GoTCharacter newCharacter =  new GoTCharacter(characterName.getText().toString(), filePath, filePath, true, housename, housedrawable, "From the app");
                 DbHelper helper = DbHelper.getInstance(RoleActivity.this);
                 helper.addcharacter(newCharacter);
+                Toast.makeText(getApplicationContext(),"DONE",Toast.LENGTH_LONG).show();
             }
         });
 

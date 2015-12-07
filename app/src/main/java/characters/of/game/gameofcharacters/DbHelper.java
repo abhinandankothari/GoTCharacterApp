@@ -42,13 +42,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         for (GoTCharacter gotchar : GoTCharacter.GOT_CHARACTERS) {
-            values.put(GoTCharacter.NAME, gotchar.name);
-            values.put(GoTCharacter.THUMB_URL, gotchar.thumbUrl);
-            values.put(GoTCharacter.FULL_URL, gotchar.fullUrl);
-            values.put(GoTCharacter.HOUSE, gotchar.house);
-            values.put(GoTCharacter.HOUSE_RES_ID, gotchar.houseResId);
-            values.put(GoTCharacter.DESCRIPTION, gotchar.description);
-            db.insert(GoTCharacter.GOT_TABLE, null, values);
+            addcharacter(db, gotchar);
         }
     }
 
@@ -69,8 +63,10 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     public void addcharacter(GoTCharacter character) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        addcharacter(getWritableDatabase(), character);
+    }
 
+    private void addcharacter(SQLiteDatabase db, GoTCharacter character) {
         ContentValues values = new ContentValues();
         values.put(GoTCharacter.NAME, character.name);
         values.put(GoTCharacter.THUMB_URL, character.thumbUrl);
@@ -81,6 +77,5 @@ public class DbHelper extends SQLiteOpenHelper {
 
         // Inserting Row
         db.insert(GoTCharacter.GOT_TABLE, null, values);
-        db.close(); // Closing database connection
     }
 }

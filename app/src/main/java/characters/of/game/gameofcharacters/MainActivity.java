@@ -20,6 +20,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        DbHelper dbHelper = DbHelper.getInstance(this);
+        int rowCount = dbHelper.getRowCount();
+        Log.d(DetailActivity.LOG_TAG, "Total rows " + rowCount);
+
         characterList = (ListView) findViewById(R.id.character_list);
         final GotAdapter adapter = new GotAdapter(this);
         characterList.setAdapter(adapter);
@@ -33,9 +37,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        DbHelper dbHelper = DbHelper.getInstance(this);
-        int rowCount = dbHelper.getRowCount();
-        Log.d(DetailActivity.LOG_TAG, "Total rows " + rowCount);
+
     }
 
     @Override
